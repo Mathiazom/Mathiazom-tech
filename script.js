@@ -1,1 +1,1 @@
-window.location.href = "www.mathiazom.tech/ColorBlender";
+window.location.href = "ColorBlender";
