@@ -1,0 +1,21 @@
+* {
+  box-sizing: border-box;
+  font-family: "Open Sans",sans-serif;
+}
+
+body{
+  background: #212121;
+}
+
+#main_title{
+  color: #eee;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  font-weight: 200;
+}
+
+.container{
+  background: #CCC;
+  color: #eee;
+}
