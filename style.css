@@ -69,13 +69,13 @@ body{
 .container_list_item{
   background: #212121;
   list-style-type: none;
-  padding: 20px 50px;
+  padding: 15px 40px;
   text-align: left;
-  display: inline-block;
+  display: table;
 }
 
 .container_list_item:hover{
-  background: #aaa;
+  background: #eee;
   color: #212121;
   cursor: pointer;
 }
@@ -91,7 +91,6 @@ body{
     list-style-type: none;
     padding: 10px 20px;
     text-align: left;
-    display: inline-block;
     font-size: 12px;
   }
 }
