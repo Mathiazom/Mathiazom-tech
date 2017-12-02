@@ -1,6 +1,7 @@
 *{
   box-sizing: border-box;
   font-family: "Open Sans",sans-serif;
+  font-weight: 300;
 }
 
 body{
@@ -8,18 +9,8 @@ body{
   background: #212121;
 }
 
-#title_div{
-  margin-bottom: 50px;
-}
-
-#title{
-  color: #eee;
-  font-weight: 300;
-  text-align: center;
-  padding: 25px 50px 5px 50px;
-  display: table;
-  margin: 0 auto;
-  font-size: 40px;
+#main_header_div{
+  background: #4a148c;
 }
 
 #sub_title{

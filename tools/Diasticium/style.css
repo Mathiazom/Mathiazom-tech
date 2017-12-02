@@ -32,14 +32,8 @@ a#creditA:hover {
   display: none;
 }
 
-#mainheader{
-  text-align: center;
-  margin-top: 0;
-  font-size: 50px;
-  max-width: 80%;
-  display: block;
-  margin: 0 auto;
-  color: #eee;
+#main_header_div{
+  background: #01579b;
 }
 
 #secondheader{

@@ -1,3 +1,7 @@
+body{
+  margin: 0;
+}
+
 #main_title{
   color: #212121;
   margin: 0 auto;
@@ -16,7 +20,6 @@
   font-weight: 200;
   background: #eee;
   padding: 30px;
-  margin-bottom: 40px;
   box-shadow: 5px 5px 5px #1b1b1b;
   max-height: 150px;
 }
@@ -24,6 +27,17 @@
 #main_title_div * {
   display: table;
   margin: 0 auto;
+}
+
+#mainheader{
+  text-align: center;
+  margin-top: 0;
+  font-size: 45px;
+  max-width: 80%;
+  display: block;
+  margin: 0 auto;
+  color: #eee;
+  padding: 20px 0;
 }
 
 #back_button{
@@ -34,6 +48,7 @@
   position: absolute;
   border: 1px solid #eee;
   top: 110px;
+  z-index: 9999;
 }
 
 #back_button:hover{
@@ -51,4 +66,29 @@
   #back_button{
     display: none;
   }
+}
+
+footer{
+  background: #eee;
+  padding: 20px;
+  width: 100%;
+}
+
+byline *{
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+}
+
+#byline_logo {
+  height: 70px;
+  display: block;
+  margin: 20px auto;
+}
+
+#byline_text{
+  text-align: center;
+  font-size: 13px;
+  color: #212121;
+  font-weight: 200;
 }
