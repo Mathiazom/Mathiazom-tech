@@ -46,7 +46,6 @@ body{
   text-decoration: none;
   font-size: 10px;
   position: absolute;
-  border: 1px solid #eee;
   top: 110px;
   z-index: 9999;
 }
