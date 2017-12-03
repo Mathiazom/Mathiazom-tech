@@ -56,7 +56,7 @@ body{
 
 .color_input_div *{
   margin: 0 auto;
-  display: table;
+  display: inline-block;
 }
 
 .color_input{
@@ -128,6 +128,8 @@ body{
 #slidecontainer1,#slidecontainer2{
   width: 70%;
   margin: 0 auto;
+  opacity: 0;
+  transition: opacity 0.5s;
 }
 
 .slidercontainertitle{

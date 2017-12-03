@@ -16,6 +16,9 @@ function init(){
     }
   }
 
+  let color_picker_button1 = document.getElementById('color_picker_button1');
+  let color_picker1 = document.getElementById("slidecontainer1");
+
   var rSlider1 = document.getElementById("rRange1");
   var gSlider1 = document.getElementById("gRange1");
   var bSlider1 = document.getElementById("bRange1");
@@ -48,8 +51,62 @@ function init(){
   bSlider2.oninput = function() {
       rangeChange();
   }
+
+  color_picker_button1.addEventListener("click",function(){
+    if(color_picker1.style.opacity == "1"){
+      color_picker1.style.opacity = "0";
+    }else{
+      rSlider1.value = getRed(color_inputs[0].value);
+      gSlider1.value = getGreen(color_inputs[0].value);
+      bSlider1.value = getBlue(color_inputs[0].value);
+      color_picker1.style.opacity = "1";
+    }
+  });
+
+  let color_picker_button2 = document.getElementById('color_picker_button2');
+  let color_picker2 = document.getElementById("slidecontainer2");
+
+  color_picker_button2.addEventListener("click",function(){
+    if(color_picker2.style.opacity == "1"){
+      color_picker2.style.opacity = "0";
+    }else{
+      rSlider2.value = getRed(color_inputs[1].value);
+      gSlider2.value = getGreen(color_inputs[1].value);
+      bSlider2.value = getBlue(color_inputs[1].value);
+      color_picker2.style.opacity = "1";
+    }
+  });
 }
 
+function getRed(col){
+  let red;
+  if(col[0] == "#"){
+    red = parseInt(col.slice(1,3),16);
+  }else if(col.slice(0,4) == "RGB("){
+    red = col.slice(4,col.length-1).split(",")[0];
+  }
+  return red;
+}
+
+function getGreen(col){
+  let green;
+  if(col[0] == "#"){
+    green = parseInt(col.slice(3,5),16);
+  }else if(col.slice(0,4) == "RGB("){
+    green = col.slice(4,col.length-1).split(",")[1];
+  }
+  return green;
+}
+
+function getBlue(col){
+  let blue;
+  if(col[0] == "#"){
+    blue = parseInt(col.slice(5,7),16);
+  }else if(col.slice(0,4) == "RGB("){
+    blue = col.slice(4,col.length-1).split(",")[2];
+  }
+  return blue;
+}
 function rangeChange(){
   var rSlider1 = document.getElementById("rRange1");
   var gSlider1 = document.getElementById("gRange1");
@@ -67,6 +124,8 @@ function rangeChange(){
 
   inp1.value = "RGB(" + rSlider1.value + "," + gSlider1.value + "," + bSlider1.value + ")";
   inp2.value = "RGB(" + rSlider2.value + "," + gSlider2.value + "," + bSlider2.value + ")";
+
+  getRed(inp1.value);
 
   blendColors();
 }
