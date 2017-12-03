@@ -2,10 +2,10 @@
 function init(){
   blendColors();
 
-  let blend_button = document.getElementById('blend_colors_button');
+  /* let blend_button = document.getElementById('blend_colors_button');
   blend_button.onclick = function(){
     blendColors();
-  };
+  }; */
 
   // TO UPPER CASE ON INPUT
   let color_inputs = document.getElementsByClassName('color_input');
@@ -13,6 +13,7 @@ function init(){
     let input = color_inputs[color_input];
     input.oninput = function(){
       input.value = input.value.toUpperCase();
+      blendColors();
     }
   }
 
@@ -145,7 +146,9 @@ function blendColors(){
   // DETERMINE COLOR FORMAT
   if((_col1[0] == parseInt(_col1[0]) && _col2[0] == parseInt(_col2[0]) && _col1.split(",").length > 1 && _col2.split(",").length > 1) || _col1.slice(0,4) == "RGB(" && _col2.slice(0,4) == "RGB("){
     result_string = getFromRGB(_col1,_col2);
-    result_string_dark = getDarkerRGB(result_string);
+    if(result_string != undefined){
+      result_string_dark = getDarkerRGB(result_string);
+    }
   }else if(_col1[0] == "#" || _col2[0] == "#"){
 
     // ADD '#' IF MISSING
@@ -158,14 +161,22 @@ function blendColors(){
     }
 
     result_string = getFromHEX(_col1,_col2,false);
-    result_string_dark = getDarkerHEX(result_string);
+    if(result_string != undefined){
+      result_string_dark = getDarkerHEX(result_string);
+    }
+  }else{
+    return;
+  }
+
+  if(result_string == undefined){
+    // DISPLAY INVALID INPUT MSG
+    document.getElementById('result_text').innerHTML = "Invalid input";
+    return;
   }
 
   // CHANGE BODY BACKGROUND TO RESULT COLOR
   document.body.style.background = result_string;
-
   document.getElementById("main_header_div").style.background = result_string_dark;
-
   // DISPLAY RESULT TEXT
   document.getElementById('result_text').innerHTML = result_string;
 }
@@ -216,6 +227,11 @@ function getFromHEX(col1,col2,display){
   let gx_10 = Math.round((g1+g2)/2);
   let bx_10 = Math.round((b1+b2)/2);
 
+  if(isNaN(rx_10) || isNaN(gx_10) || isNaN(bx_10)){
+    console.log(undefined);
+    return undefined;
+  }
+
   // CONVERT BACK TO HEXADECIMAL
   let rx = addZero(rx_10.toString(16));
   rx = rx.toUpperCase();
@@ -227,8 +243,6 @@ function getFromHEX(col1,col2,display){
   // CREATE AND RETURN FINAL STRING
   let result_string = "#" + rx + gx + bx;
   return result_string;
-
-
 }
 
 function getFromRGB(_col1,_col2){
