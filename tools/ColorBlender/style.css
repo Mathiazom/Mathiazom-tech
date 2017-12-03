@@ -6,7 +6,7 @@
 
 body{
   margin: 0;
-  background: #212121;
+  background: #250A46;
 }
 
 #main_header_div{
@@ -21,6 +21,10 @@ body{
   display: table;
   margin: 0 auto;
   font-size: 12px;
+}
+
+#blend_area{
+  margin: 50px auto 100px auto;
 }
 
 .color_input_div{
@@ -76,7 +80,6 @@ body{
   background: #eee;
   color: #212121;
   font-size: 12px;
-  border: 1px solid #eee;
 }
 
 #blend_colors_button:hover{

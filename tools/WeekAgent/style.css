@@ -97,7 +97,11 @@ body {
 
 @media screen and (max-width:700px){
   #milliSinceCom {
-    font-size: 50px;
+    font-size: 20px;
+  }
+
+  #milliSincepara{
+    font-size: 40px;
   }
 
   .numDom{
