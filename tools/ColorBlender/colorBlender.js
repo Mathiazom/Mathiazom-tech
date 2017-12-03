@@ -1,7 +1,7 @@
 
 function init(){
   blendColors();
-  
+
   let blend_button = document.getElementById('blend_colors_button');
   blend_button.onclick = function(){
     blendColors();
@@ -15,6 +15,60 @@ function init(){
       input.value = input.value.toUpperCase();
     }
   }
+
+  var rSlider1 = document.getElementById("rRange1");
+  var gSlider1 = document.getElementById("gRange1");
+  var bSlider1 = document.getElementById("bRange1");
+
+  var rSlider2 = document.getElementById("rRange2");
+  var gSlider2 = document.getElementById("gRange2");
+  var bSlider2 = document.getElementById("bRange2");
+
+  // Update the current slider value (each time you drag the slider handle)
+  rSlider1.oninput = function() {
+      rangeChange();
+  }
+
+  gSlider1.oninput = function() {
+      rangeChange();
+  }
+
+  bSlider1.oninput = function() {
+      rangeChange();
+  }
+
+  rSlider2.oninput = function() {
+      rangeChange();
+  }
+
+  gSlider2.oninput = function() {
+      rangeChange();
+  }
+
+  bSlider2.oninput = function() {
+      rangeChange();
+  }
+}
+
+function rangeChange(){
+  var rSlider1 = document.getElementById("rRange1");
+  var gSlider1 = document.getElementById("gRange1");
+  var bSlider1 = document.getElementById("bRange1");
+
+  var rSlider2 = document.getElementById("rRange2");
+  var gSlider2 = document.getElementById("gRange2");
+  var bSlider2 = document.getElementById("bRange2");
+
+  console.log(rSlider1.value + gSlider1.value + bSlider1.value);
+  console.log(rSlider2.value+gSlider2.value+bSlider2.value);
+
+  let inp1 = document.getElementsByClassName('color_input')[0];
+  let inp2 = document.getElementsByClassName('color_input')[1];
+
+  inp1.value = "RGB(" + rSlider1.value + "," + gSlider1.value + "," + bSlider1.value + ")";
+  inp2.value = "RGB(" + rSlider2.value + "," + gSlider2.value + "," + bSlider2.value + ")";
+
+  blendColors();
 }
 
 function blendColors(){
@@ -30,9 +84,9 @@ function blendColors(){
   let result_string_dark;
 
   // DETERMINE COLOR FORMAT
-  if(_col1[0] == parseInt(_col1[0]) && _col2[0] == parseInt(_col2[0]) && _col1.split(",").length > 1 && _col2.split(",").length > 1){
+  if((_col1[0] == parseInt(_col1[0]) && _col2[0] == parseInt(_col2[0]) && _col1.split(",").length > 1 && _col2.split(",").length > 1) || _col1.slice(0,4) == "RGB(" && _col2.slice(0,4) == "RGB("){
     result_string = getFromRGB(_col1,_col2);
-    result_string_dark = getDarkerRGB(_col1);
+    result_string_dark = getDarkerRGB(result_string);
   }else if(_col1[0] == "#" || _col2[0] == "#"){
 
     // ADD '#' IF MISSING
@@ -118,9 +172,22 @@ function getFromHEX(col1,col2,display){
 
 }
 
-function getFromRGB(col1,col2){
+function getFromRGB(_col1,_col2){
+  let col1 = _col1;
+  let col2 = _col2;
+
   let inp1 = document.getElementsByClassName('color_input')[0];
   let inp2 = document.getElementsByClassName('color_input')[1];
+
+  if(col1.slice(0,4) == "RGB("){
+    col1 = col1.slice(4);
+    col1 = col1.slice(0,col1.length-1);
+  }
+
+  if(col2.slice(0,4) == "RGB("){
+    col2 = col2.slice(4);
+    col2 = col2.slice(0,col2.length-1);
+  }
 
   let vals1 = col1.split(",");
   let vals2 = col2.split(",");
@@ -137,7 +204,7 @@ function getFromRGB(col1,col2){
   let gx = Math.round((g1+g2)/2);
   let bx = Math.round((b1+b2)/2);
 
-  let result_string = "rgb(" + rx + "," + gx + "," + bx + ")";
+  let result_string = "RGB(" + rx + "," + gx + "," + bx + ")";
 
   return result_string;
 }
