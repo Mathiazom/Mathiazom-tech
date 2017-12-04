@@ -66,6 +66,10 @@ body {
   font-weight: 300;
 }
 
+#milliSincepara{
+  font-size: 80px;
+}
+
 #milliSinceCom {
   font-size: 25px;
   margin-top: 50px;

@@ -109,10 +109,10 @@ function refreshTime(){
   /* LA MILLISECONDE */
 
   var milliSince = time.getTime();
-  var milliSinceComS = floor(milliSince/1000);
-  var milliSinceComH = floor(milliSinceComS/3600);
-  var milliSinceComD = floor(milliSinceComH/24);
-  var milliSinceComY = floor(milliSinceComD/365)
+  var milliSinceComS = Math.floor(milliSince/1000);
+  var milliSinceComH = Math.floor(milliSinceComS/3600);
+  var milliSinceComD = Math.floor(milliSinceComH/24);
+  var milliSinceComY = Math.floor(milliSinceComD/365)
 
   /* DOMINATOR */
   document.getElementById('datepara').innerHTML = dateVis + "." + monthVis + "." + year;
@@ -135,11 +135,11 @@ function init(){
   /* PAGE SLIDE */
   infoPages[0].style.display = "block";
   document.body.style.background = pagePaints[infoPage];
-  $('#pageFieldR').on('click touchstart',function(){
+  document.getElementById('pageFieldR').addEventListener('click',function(){
     pageSlider(1,1);
   });
 
-  $('#pageFieldL').on('click touchstart',function(){
+  document.getElementById('pageFieldL').addEventListener('click',function(){
     pageSlider(-1,0);
   });
 
@@ -161,8 +161,10 @@ function init(){
   }
 
   setInterval(function(){
-    refreshTime()
+    refreshTime();
   },100);
 }
 
-init();
+window.onload = function(){
+  init();
+};
