@@ -1,51 +1,7 @@
-function creatorGit(){
-  console.log("test");
-}
-
-function setup(){
-  document.getElementById('loadDiv').style.display = "none";
-
-  /* PAINTER */
-  var pagePaints = ["#007ac1","green","#ef6c00","#b71c1c"];
-  var infoPage = 0;
-  var infoPages = document.getElementsByClassName('inner');
-  var infoPageNum = infoPages.length;
-  /* PAGE SLIDE */
-  infoPages[0].style.display = "block";
-  document.body.style.background = pagePaints[infoPage];
-  $('#pageFieldR').on('click touchstart',function(){
-    pageSlider(1,1);
-  });
-
-  $('#pageFieldL').on('click touchstart',function(){
-    pageSlider(-1,0);
-  });
-
-  function pageSlider(pageDir,limAdj){
-    if(infoPage < infoPageNum - limAdj){
-      infoPages[infoPage].style.display = "none";
-      infoPage = infoPage + pageDir;
-      if(infoPage < 0){
-        infoPage = infoPageNum-1;
-      }
-      infoPages[infoPage].style.display = "block";
-      document.body.style.background = pagePaints[infoPage];
-    }else{
-      infoPages[infoPage].style.display = "none";
-      infoPage = 0;
-      infoPages[infoPage].style.display = "block";
-      document.body.style.background = pagePaints[infoPage];
-    }
-  }
-}
-
-function draw(){
+function refreshTime(){
 
   /* CURRENT TIME */
   var time = new Date();
-  /*time.setMonth(0);
-  time.setDate(1);
-  time.setFullYear(2034);*/
   var date = time.getDate();
   var year = time.getFullYear();
   var month = time.getMonth()+1;
@@ -166,3 +122,47 @@ function draw(){
   document.getElementById('milliSincepara').innerHTML = milliSince;
   document.getElementById('milliSinceCom').innerHTML = milliSinceComS + " seconds" + "<br/>" + milliSinceComH + " hours" + "<br/>" + milliSinceComD + " days" + "<br/>" + milliSinceComY + " years";
 }
+
+function init(){
+
+  document.getElementById('loadDiv').style.display = "none";
+
+  /* PAINTER */
+  var pagePaints = ["#007ac1","green","#ef6c00","#b71c1c"];
+  var infoPage = 0;
+  var infoPages = document.getElementsByClassName('inner');
+  var infoPageNum = infoPages.length;
+  /* PAGE SLIDE */
+  infoPages[0].style.display = "block";
+  document.body.style.background = pagePaints[infoPage];
+  $('#pageFieldR').on('click touchstart',function(){
+    pageSlider(1,1);
+  });
+
+  $('#pageFieldL').on('click touchstart',function(){
+    pageSlider(-1,0);
+  });
+
+  function pageSlider(pageDir,limAdj){
+    if(infoPage < infoPageNum - limAdj){
+      infoPages[infoPage].style.display = "none";
+      infoPage = infoPage + pageDir;
+      if(infoPage < 0){
+        infoPage = infoPageNum-1;
+      }
+      infoPages[infoPage].style.display = "block";
+      document.body.style.background = pagePaints[infoPage];
+    }else{
+      infoPages[infoPage].style.display = "none";
+      infoPage = 0;
+      infoPages[infoPage].style.display = "block";
+      document.body.style.background = pagePaints[infoPage];
+    }
+  }
+
+  setInterval(function(){
+    refreshTime()
+  },100);
+}
+
+init();

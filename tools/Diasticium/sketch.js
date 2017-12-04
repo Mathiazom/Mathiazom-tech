@@ -78,18 +78,6 @@ function runDiasticify(){
   document.getElementById('showUsedInput').style.display = "block";
 }
 
-/*function useSampleText(){
-  document.getElementById('textinput').style.display = "none";
-  document.getElementById('sampleLoadImg').style.display = "block";
-  $.get('carnotaurus.txt', function(result) {
-    document.getElementById('textinput').value = result;
-    document.getElementById('textinput').style.display = "block";
-    textAreaAdjust(document.getElementById('textinput'));
-    document.getElementById('sampleLoadImg').style.display = "none";
-    document.getElementById('runButton').style.display = "inline";
-});
-}*/
-
 function useSampleText(){
   document.getElementById('textinput').style.display = "none";
   document.getElementById('sampleLoadImg').style.display = "block";
