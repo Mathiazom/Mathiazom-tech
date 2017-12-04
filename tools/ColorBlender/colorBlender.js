@@ -2,11 +2,6 @@
 function init(){
   blendColors();
 
-  /* let blend_button = document.getElementById('blend_colors_button');
-  blend_button.onclick = function(){
-    blendColors();
-  }; */
-
   // TO UPPER CASE ON INPUT
   let color_inputs = document.getElementsByClassName('color_input');
   for(color_input in color_inputs){
@@ -56,11 +51,17 @@ function init(){
   color_picker_button1.addEventListener("click",function(){
     if(color_picker1.style.opacity == "1"){
       color_picker1.style.opacity = "0";
+      rSlider1.disabled = true;
+      gSlider1.disabled = true;
+      bSlider1.disabled = true;
     }else{
       rSlider1.value = getRed(color_inputs[0].value);
       gSlider1.value = getGreen(color_inputs[0].value);
       bSlider1.value = getBlue(color_inputs[0].value);
       color_picker1.style.opacity = "1";
+      rSlider1.disabled = false;
+      gSlider1.disabled = false;
+      bSlider1.disabled = false;
     }
   });
 
@@ -70,11 +71,17 @@ function init(){
   color_picker_button2.addEventListener("click",function(){
     if(color_picker2.style.opacity == "1"){
       color_picker2.style.opacity = "0";
+      rSlider2.disabled = true;
+      gSlider2.disabled = true;
+      bSlider2.disabled = true;
     }else{
       rSlider2.value = getRed(color_inputs[1].value);
       gSlider2.value = getGreen(color_inputs[1].value);
       bSlider2.value = getBlue(color_inputs[1].value);
       color_picker2.style.opacity = "1";
+      rSlider2.disabled = false;
+      gSlider2.disabled = false;
+      bSlider2.disabled = false;
     }
   });
 }
@@ -108,6 +115,7 @@ function getBlue(col){
   }
   return blue;
 }
+
 function rangeChange(){
   var rSlider1 = document.getElementById("rRange1");
   var gSlider1 = document.getElementById("gRange1");
@@ -117,16 +125,23 @@ function rangeChange(){
   var gSlider2 = document.getElementById("gRange2");
   var bSlider2 = document.getElementById("bRange2");
 
-  console.log(rSlider1.value + gSlider1.value + bSlider1.value);
-  console.log(rSlider2.value+gSlider2.value+bSlider2.value);
-
   let inp1 = document.getElementsByClassName('color_input')[0];
   let inp2 = document.getElementsByClassName('color_input')[1];
 
   inp1.value = "RGB(" + rSlider1.value + "," + gSlider1.value + "," + bSlider1.value + ")";
   inp2.value = "RGB(" + rSlider2.value + "," + gSlider2.value + "," + bSlider2.value + ")";
 
-  getRed(inp1.value);
+  if(tooBright(inp1.value)){
+    document.getElementById('color_slider_title1').style.color = "#212121";
+  }else{
+    document.getElementById('color_slider_title1').style.color = "#eee";
+  }
+
+  if(tooBright(inp2.value)){
+    document.getElementById('color_slider_title2').style.color = "#212121";
+  }else{
+    document.getElementById('color_slider_title2').style.color = "#eee";
+  }
 
   blendColors();
 }
@@ -139,6 +154,9 @@ function blendColors(){
   // GET SECOND COLOR
   let _inp2 = document.getElementsByClassName('color_input')[1];
   let _col2 = _inp2.value;
+
+  document.getElementById('color_slider_title1').style.background = _col1;
+  document.getElementById('color_slider_title2').style.background = _col2;
 
   let result_string;
   let result_string_dark;
@@ -172,6 +190,12 @@ function blendColors(){
     // DISPLAY INVALID INPUT MSG
     document.getElementById('result_text').innerHTML = "Invalid input";
     return;
+  }
+
+  if(tooBright(result_string)){
+    document.getElementById('blend_area').className = "darkText";
+  }else{
+    document.getElementById('blend_area').className = "lightText";
   }
 
   // CHANGE BODY BACKGROUND TO RESULT COLOR
@@ -228,7 +252,6 @@ function getFromHEX(col1,col2,display){
   let bx_10 = Math.round((b1+b2)/2);
 
   if(isNaN(rx_10) || isNaN(gx_10) || isNaN(bx_10)){
-    console.log(undefined);
     return undefined;
   }
 
@@ -288,6 +311,17 @@ function getDarkerHEX(col){
 
 function getDarkerRGB(col){
   return getFromRGB(col,"0,0,0");
+}
+
+function tooBright(col){
+  let red = getRed(col);
+  let green = getGreen(col);
+  let blue = getBlue(col);
+
+  if((red*0.299 + green*0.587 + blue*0.114) > 186){
+    return true;
+  }
+  return false;
 }
 
 function addZero(s){
