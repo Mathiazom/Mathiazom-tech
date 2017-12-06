@@ -12,16 +12,9 @@ function init(){
     }
   }
 
-  let color_picker_button1 = document.getElementById('color_picker_button1');
-  let color_picker1 = document.getElementById("slidecontainer1");
-
   var rSlider1 = document.getElementById("rRange1");
   var gSlider1 = document.getElementById("gRange1");
   var bSlider1 = document.getElementById("bRange1");
-
-  var rSlider2 = document.getElementById("rRange2");
-  var gSlider2 = document.getElementById("gRange2");
-  var bSlider2 = document.getElementById("bRange2");
 
   // Update the current slider value (each time you drag the slider handle)
   rSlider1.oninput = function() {
@@ -36,6 +29,10 @@ function init(){
       rangeChange();
   }
 
+  var rSlider2 = document.getElementById("rRange2");
+  var gSlider2 = document.getElementById("gRange2");
+  var bSlider2 = document.getElementById("bRange2");
+
   rSlider2.oninput = function() {
       rangeChange();
   }
@@ -48,42 +45,80 @@ function init(){
       rangeChange();
   }
 
+  let color_picker_button1 = document.getElementById('color_picker_button1');
   color_picker_button1.addEventListener("click",function(){
-    if(color_picker1.style.opacity == "1"){
-      color_picker1.style.opacity = "0";
-      rSlider1.disabled = true;
-      gSlider1.disabled = true;
-      bSlider1.disabled = true;
-    }else{
-      rSlider1.value = getRed(color_inputs[0].value);
-      gSlider1.value = getGreen(color_inputs[0].value);
-      bSlider1.value = getBlue(color_inputs[0].value);
-      color_picker1.style.opacity = "1";
-      rSlider1.disabled = false;
-      gSlider1.disabled = false;
-      bSlider1.disabled = false;
-    }
+    toggleSliders1();
   });
 
   let color_picker_button2 = document.getElementById('color_picker_button2');
-  let color_picker2 = document.getElementById("slidecontainer2");
-
   color_picker_button2.addEventListener("click",function(){
-    if(color_picker2.style.opacity == "1"){
-      color_picker2.style.opacity = "0";
-      rSlider2.disabled = true;
-      gSlider2.disabled = true;
-      bSlider2.disabled = true;
-    }else{
-      rSlider2.value = getRed(color_inputs[1].value);
-      gSlider2.value = getGreen(color_inputs[1].value);
-      bSlider2.value = getBlue(color_inputs[1].value);
-      color_picker2.style.opacity = "1";
-      rSlider2.disabled = false;
-      gSlider2.disabled = false;
-      bSlider2.disabled = false;
-    }
+    toggleSliders2();
   });
+
+  let color_picker_close1 = document.getElementById('color_picker_close1');
+  color_picker_close1.addEventListener("click",function(){
+    toggleSliders1();
+    color_picker_close1.style.pointerEvents ="none";
+  });
+
+  let color_picker_close2 = document.getElementById('color_picker_close2');
+  color_picker_close2.addEventListener("click",function(){
+    toggleSliders2();
+    color_picker_close2.style.pointerEvents ="none";
+  });
+}
+
+
+function toggleSliders1(){
+  let color_inputs = document.getElementsByClassName('color_input');
+  let color_picker1 = document.getElementById("slidecontainer1");
+  var rSlider1 = document.getElementById("rRange1");
+  var gSlider1 = document.getElementById("gRange1");
+  var bSlider1 = document.getElementById("bRange1");
+  if(color_picker1.style.opacity == "1"){
+    color_picker1.style.opacity = "0";
+    rSlider1.disabled = true;
+    gSlider1.disabled = true;
+    bSlider1.disabled = true;
+
+    color_picker_close1.style.pointerEvents ="none";
+  }else{
+    rSlider1.value = getRed(color_inputs[0].value);
+    gSlider1.value = getGreen(color_inputs[0].value);
+    bSlider1.value = getBlue(color_inputs[0].value);
+    color_picker1.style.opacity = "1";
+    rSlider1.disabled = false;
+    gSlider1.disabled = false;
+    bSlider1.disabled = false;
+
+    color_picker_close1.style.pointerEvents ="auto";
+  }
+}
+
+function toggleSliders2(){
+  let color_inputs = document.getElementsByClassName('color_input');
+  let color_picker2 = document.getElementById("slidecontainer2");
+  var rSlider2 = document.getElementById("rRange2");
+  var gSlider2 = document.getElementById("gRange2");
+  var bSlider2 = document.getElementById("bRange2");
+  if(color_picker2.style.opacity == "1"){
+    color_picker2.style.opacity = "0";
+    rSlider2.disabled = true;
+    gSlider2.disabled = true;
+    bSlider2.disabled = true;
+
+    color_picker_close2.style.pointerEvents ="none";
+  }else{
+    rSlider2.value = getRed(color_inputs[1].value);
+    gSlider2.value = getGreen(color_inputs[1].value);
+    bSlider2.value = getBlue(color_inputs[1].value);
+    color_picker2.style.opacity = "1";
+    rSlider2.disabled = false;
+    gSlider2.disabled = false;
+    bSlider2.disabled = false;
+
+    color_picker_close2.style.pointerEvents ="auto";
+  }
 }
 
 function getRed(col){

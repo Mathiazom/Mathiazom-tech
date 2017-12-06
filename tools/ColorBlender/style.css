@@ -122,6 +122,24 @@ body{
   margin-top: 100px;
 }
 
+.helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+#color_picker_button1,#color_picker_button2{
+  transition: transform 0.1s;
+  opacity: 0.7;
+  position: relative;
+  top: 50%;
+}
+
+#color_picker_button1:hover,#color_picker_button2:hover{
+  cursor: pointer;
+  opacity: 1;
+}
+
 /* Color slider styles */
 
 #slidecontainer1 {
