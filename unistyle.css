@@ -83,6 +83,13 @@ byline *{
   height: 70px;
   display: block;
   margin: 20px auto;
+  transition: transform 0.4s;
+  transition-timing-function: ease-out;
+}
+
+#byline_logo:hover{
+  transform: rotate(90deg);
+  cursor: pointer;
 }
 
 #byline_text{
