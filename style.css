@@ -100,14 +100,16 @@ body{
 
 .container_img_div{
   grid-area: image;
-  margin-right: 30px;
+  margin-right: 10px;
   overflow: hidden;
+  align-self: center;
 }
 
 .container_img{
   margin: 0px auto;
   display: block;
   width: 80%;
+  transition: transform 0.7s;
 }
 
 .container_title_div{
@@ -136,7 +138,7 @@ body{
 }
 
 .container_desc{
-  font-size: 15px;
+  font-size: 1.0em;
   font-weight: 200;
   margin: 0 0 10px 0;
   padding: 20px;
