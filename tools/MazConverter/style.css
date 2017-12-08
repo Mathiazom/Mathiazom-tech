@@ -7,14 +7,15 @@ body{
 }
 
 #conversion_zone{
+  width: 60%;
   padding: 20px;
-  margin: 50px 15% 0 15%;
+  margin: 0 auto;
   display: grid;
   grid-template-rows: auto auto;
-  grid-template-columns: 50% 50%;
-
+  grid-template-columns: auto auto;
+  grid-gap: 0 50px;
   grid-template-areas:
-  "base_unit base_unit"
+  "base_unit ."
   "conversion_from conversion_to";
 }
 
@@ -24,16 +25,17 @@ body{
 
 #conversion_from{
   grid-area: conversion_from;
+  width: 100%;
 }
 
 #conversion_to{
   grid-area: conversion_to;
-  margin: 0 auto 0 15%;
-
+  width: 100%;
 }
 
 @media screen and (max-width:900px){
   #conversion_zone{
+    width: 100%;
     margin: 0;
     padding: 40px;
     grid-template-rows: auto auto auto;
@@ -45,7 +47,13 @@ body{
     "conversion_to";
   }
   #base_unit_zone,#conversion_from,#conversion_to{
+    width: 100%;
     margin: 0;
+    justify-self:center;
+  }
+
+  .unit_input{
+    width: 100%;
   }
 }
 
@@ -109,6 +117,7 @@ body{
   color: #eee;
   font-size: 1.7em;
   margin: 20px auto;
+  width: 100%;
 }
 
 .unit_input::placeholder{
