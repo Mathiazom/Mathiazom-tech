@@ -1,24 +1,63 @@
 {
   "Length":{
-    "Gigameter":9,
-    "Megameter":6,
-    "Kilometer":3,
-    "Hectometer":2,
-    "Decameter":1,
-    "Meter":0,
-    "Decimeter":-1,
-    "Centimeter":-2,
-    "Millimeter":-3,
-    "Micrometer":-6,
-    "Nanometer":-9
+    "Base unit (SI)":"div",
+    "Meter":1,
+
+    "Multiples (SI)":"div",
+    "Gigameter":1000000000,
+    "Megameter":1000000,
+    "Kilometer":1000,
+    "Hectometer":100,
+    "Decameter":10,
+
+    "Fractions (SI)":"div",
+    "Decimeter":0.1,
+    "Centimeter":"1/100",
+    "Millimeter":0.001,
+    "Micrometer":0.000001,
+    "Nanometer":0.000000001,
+
+    "Imperial":"div",
+    "Inch":0.0254,
+    "Foot":0.3048,
+    "Yard":0.9144,
+    "Mile (imperial)":1609.344,
+    "Nautical mile":1853.184
+
+
   },
   "Mass":{
-    "Teragram":9,
-    "Gigagram":6,
-    "Megagram":3,
-    "Kilogram":0,
-    "Hectogram":-1,
-    "Decagram":-2,
-    "Gram":-3
+    "Base unit (SI)":"div",
+    "Kilogram":1,
+
+
+    "Multiples (SI)":"div",
+    "Teragram":1000000000,
+    "Gigagram":1000000,
+    "Megagram":1000,
+
+    "Fractions (SI)":"div",
+    "Hectogram":0.1,
+    "Decagram":0.01,
+    "Gram":0.001,
+
+    "Imperial":"div",
+    "Pound": 0.45359237,
+    "Ounce": 0.028349523125,
+    "Stone":6.35029318
+  },
+  "Volume":{
+    "Cubic metre":1,
+
+
+    "Litre":"1e-3",
+    "Millilitre":"1e-6"
+
+  },
+  "Time":{
+    "Second":1,
+    "Minute":60,
+    "Hour":3600,
+    "Day (colloquial)":86400
   }
 }

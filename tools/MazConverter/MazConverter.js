@@ -9,18 +9,14 @@ function init(){
   let input_from = document.getElementById('conversion_from_input');
   let input_to = document.getElementById('conversion_to_input');
 
-  input_from.oninput = function(){
-    let convertFromExp = unitDict[base_unit][convertFrom];
-    let convertToExp = unitDict[base_unit][convertTo];
 
-    input_to.value = input_from.value*(Math.pow(10,convertFromExp-convertToExp));
+
+  input_from.oninput = function(){
+    input_to.value = input_from.value*getConvertedValue();
   }
 
   input_to.oninput = function(){
-    let convertFromExp = unitDict[base_unit][convertFrom];
-    let convertToExp = unitDict[base_unit][convertTo];
-
-    input_from.value = input_to.value*(Math.pow(10,convertToExp-convertFromExp));
+    input_from.value = input_to.value*getConvertedValue();
   }
 
   // BASE UNIT
@@ -79,7 +75,8 @@ function getDictJSON(){
 function baseUnitChange(){
   document.getElementById('base_unit').innerText = base_unit;
   for(var key in unitDict[base_unit]) {
-    if(unitDict[base_unit].hasOwnProperty(key)) {
+    if(unitDict[base_unit].hasOwnProperty(key) && unitDict[base_unit][key] != "div") {
+      console.log(key);
         convertFrom = key;
         break;
     }
@@ -93,24 +90,36 @@ function baseUnitChange(){
   to_dropdown.innerHTML = "";
 
   for(var unit in unitDict[base_unit]){(function(unit){
-    var item_from = document.createElement("p");
-    item_from.innerText = unit;
-    item_from.onclick =
-      function(){
-        convertFrom = unit;
-        unitChange();
-      };
+    if(unitDict[base_unit][unit] == "div"){
+      var divider_from = document.createElement("h1");
+      divider_from.innerText = unit;
 
-    from_dropdown.appendChild(item_from);
+      from_dropdown.appendChild(divider_from);
 
-    var item_to = document.createElement("p");
-    item_to.innerText = unit;
-    item_to.onclick =
-      function(){
-        convertTo = unit;
-        unitChange();
-      };
-    to_dropdown.appendChild(item_to);
+      var divider_to = document.createElement("h1");
+      divider_to.innerText = unit;
+
+      to_dropdown.appendChild(divider_to);
+    }else{
+      var item_from = document.createElement("p");
+      item_from.innerText = unit;
+      item_from.onclick =
+        function(){
+          convertFrom = unit;
+          unitChange();
+        };
+
+      from_dropdown.appendChild(item_from);
+
+      var item_to = document.createElement("p");
+      item_to.innerText = unit;
+      item_to.onclick =
+        function(){
+          convertTo = unit;
+          unitChange();
+        };
+      to_dropdown.appendChild(item_to);
+    }
   })(unit);
 
   }
@@ -118,17 +127,47 @@ function baseUnitChange(){
   unitChange();
 }
 
+function getConvertedValue(){
+  let convertFromFactor = eval(unitDict[base_unit][convertFrom]);
+  let convertToFactor = eval(unitDict[base_unit][convertTo]);
+
+  var _cf = (function() {
+    function _shift(x) {
+      var parts = x.toString().split('.');
+      return (parts.length < 2) ? 1 : Math.pow(10, parts[1].length);
+    }
+    return function() {
+      return Array.prototype.reduce.call(arguments, function (prev, next) { return prev === undefined || next === undefined ? undefined : Math.max(prev, _shift (next)); }, -Infinity);
+    };
+  })();
+
+  Math.a = function () {
+    var f = _cf.apply(null, arguments); if(f === undefined) return undefined;
+    function cb(x, y, i, o) { return x + f * y; }
+    return Array.prototype.reduce.call(arguments, cb, 0) / f;
+  };
+
+  Math.s = function (l,r) { var f = _cf(l,r); return (l * f - r * f) / f; };
+
+  Math.m = function () {
+    var f = _cf.apply(null, arguments);
+    function cb(x, y, i, o) { return (x*f) * (y*f) / (f * f); }
+    return Array.prototype.reduce.call(arguments, cb, 1);
+  };
+
+  Math.d = function (l,r) { var f = _cf(l,r); return (l * f) / (r * f); };
+
+  return Math.d(convertFromFactor,convertToFactor);
+}
+
 function unitChange(){
   document.getElementById('conversion_from_unit').innerText = convertFrom;
   document.getElementById('conversion_to_unit').innerText = convertTo;
 
-  let convertFromExp = unitDict[base_unit][convertFrom];
-  let convertToExp = unitDict[base_unit][convertTo];
-
   let input_from = document.getElementById('conversion_from_input');
   let input_to = document.getElementById('conversion_to_input');
 
-  input_to.value = input_from.value*(Math.pow(10,convertFromExp-convertToExp));
+  input_to.value = input_from.value*getConvertedValue();
 }
 
 window.onload = function(){
