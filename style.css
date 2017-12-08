@@ -54,26 +54,34 @@ body{
 }
 
 .container:nth-of-type(1){
-  background-color: #4a148c;
+  background-color: #bc5100;
 }
 
 .container_button:nth-of-type(1):hover{
-  color: #4a148c;
+  color: #bc5100;
 }
 
 .container:nth-of-type(2){
-  background-color: #1b5e20;
+  background-color: #4a148c;
 }
 
 .container_button:nth-of-type(2):hover{
-  color: #1b5e20;
+  color: #4a148c;
 }
 
 .container:nth-of-type(3){
-  background-color: #01579b;
+  background-color: #1b5e20;
 }
 
 .container_button:nth-of-type(3):hover{
+  color: #1b5e20;
+}
+
+.container:nth-of-type(4){
+  background-color: #01579b;
+}
+
+.container_button:nth-of-type(4):hover{
   color: #01579b;
 }
 

@@ -1,0 +1,79 @@
+<html>
+<head>
+  <title>Maz Converter - Mathiazom</title>
+  <script src=MazConverter.js></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="../../unistyle.css">
+  <link rel=stylesheet type=text/css href=style.css>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,800" rel="stylesheet">
+  <link rel="shortcut icon" type="image/png" href="../../img/favicon.png"/>
+</head>
+  <body>
+    <header>
+      <a href="/">
+        <div id=main_title_div style="box-shadow:none">
+          <img id=main_title_logo src=../../img/logo.png>
+          <button id=back_button><i class="material-icons">navigate_before</i></button>
+        </div>
+      </a>
+    </header>
+    <div id=main_header_div>
+      <h1 id=mainheader>Maz Converter</h1>
+    </div>
+
+    <article id=conversion_zone>
+
+      <article id=base_unit_zone>
+        <div class=unit_dropdown>
+          <p id=base_unit class=dropdown_title>Mass</p>
+          <div id=base_unit_dropdown class=unit_dropdown_content>
+            <p>Length</p>
+            <p>Mass</p>
+            <!-- <p>Time</p>
+            <p>Electric current</p>
+            <p>Temperature</p>
+            <p>Amount of substance</p>
+            <p>Luminous intensity</p> -->
+          </div>
+        </div>
+      </article>
+
+      <article id=conversion_from>
+        <div class=unit_dropdown>
+          <p id=conversion_from_unit class=dropdown_title></p>
+          <div id=conversion_from_dropdown class=unit_dropdown_content>
+            <p>Meter</p>
+            <p>Centimeter</p>
+            <p>Millimeter</p>
+            <p>Micrometer</p>
+            <p>Nanometer</p>
+            <p>Inch</p>
+          </div>
+
+        </div>
+
+
+        <input type=number id=conversion_from_input class=unit_input></input>
+      </article>
+
+      <article id=conversion_to>
+        <div class=unit_dropdown>
+          <p id=conversion_to_unit class=dropdown_title></p>
+          <div id=conversion_to_dropdown class=unit_dropdown_content>
+            <p>Meter</p>
+            <p>Centimeter</p>
+            <p>Millimeter</p>
+            <p>Micrometer</p>
+            <p>Nanometer</p>
+            <p>Inch</p>
+          </div>
+
+        </div>
+
+
+        <input type=number id=conversion_to_input class=unit_input></input>
+      </article>
+    </article>
+  </body>
+</html>

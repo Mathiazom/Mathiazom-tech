@@ -1,0 +1,134 @@
+body{
+  background: #5E2900;
+}
+
+#main_header_div{
+  background: #bc5100;
+}
+
+#conversion_zone{
+  padding: 20px;
+  margin: 50px 15% 0 15%;
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 50% 50%;
+
+  grid-template-areas:
+  "base_unit base_unit"
+  "conversion_from conversion_to";
+}
+
+#base_unit_zone{
+  grid-area: base_unit;
+}
+
+#conversion_from{
+  grid-area: conversion_from;
+}
+
+#conversion_to{
+  grid-area: conversion_to;
+  margin: 0 auto 0 15%;
+
+}
+
+@media screen and (max-width:900px){
+  #conversion_zone{
+    margin: 0;
+    padding: 40px;
+    grid-template-rows: auto auto auto;
+    grid-template-columns: 100%;
+
+    grid-template-areas:
+    "base_unit"
+    "conversion_from"
+    "conversion_to";
+  }
+  #base_unit_zone,#conversion_from,#conversion_to{
+    margin: 0;
+  }
+}
+
+#base_unit{
+  border-left: 7px solid rgba(255,255,255,0.7);
+  padding-left: 10px;
+}
+
+.dropdown_title{
+  margin-bottom: 0;
+}
+
+.unit_dropdown:hover .unit_dropdown_content{
+  transform: scaleY(1) !important;
+  transform-origin: top;
+}
+
+.unit_dropdown:hover #base_unit{
+  border-left: 7px solid #eee;
+}
+
+.unit_dropdown{
+  font-weight: 300;
+  font-size: 1.7em;
+  margin-top: 50px !important;
+  position: relative;
+  color: #eee;
+  max-width: 100%;
+}
+
+.unit_dropdown_content{
+  position: absolute;
+  z-index: 1;
+  background: #eee;
+  font-size: 20px;
+  color: #212121;
+  transform :scaleY(0);
+  transform-origin: top;
+  transition: transform 0.2s;
+  max-height: 300px;
+  width: 100%;
+  min-width: 200px;
+  overflow: scroll;
+}
+
+.unit_dropdown_content p{
+  padding: 17px 20px;
+  margin: 0;
+}
+
+.unit_dropdown_content p:hover{
+  background: #212121;
+  color: #eee;
+  cursor: pointer;
+}
+
+.unit_input{
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  color: #eee;
+  font-size: 1.7em;
+  margin: 20px auto;
+}
+
+.unit_input::placeholder{
+  color: rgba(255,255,255,0.5);
+}
+
+.unit_input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: rgba(255,255,255,0.5);
+}
+.unit_input::-moz-placeholder { /* Firefox 19+ */
+  color: rgba(255,255,255,0.5);
+}
+.unit_input:-ms-input-placeholder { /* IE 10+ */
+  color: rgba(255,255,255,0.5);
+}
+.unit_input:-moz-placeholder { /* Firefox 18- */
+  color: rgba(255,255,255,0.5);
+}
+
+.unit_input:focus{
+  outline: none;
+  border-bottom: 1px solid #eee;
+}

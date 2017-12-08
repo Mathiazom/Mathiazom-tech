@@ -1,0 +1,24 @@
+{
+  "Length":{
+    "Gigameter":9,
+    "Megameter":6,
+    "Kilometer":3,
+    "Hectometer":2,
+    "Decameter":1,
+    "Meter":0,
+    "Decimeter":-1,
+    "Centimeter":-2,
+    "Millimeter":-3,
+    "Micrometer":-6,
+    "Nanometer":-9
+  },
+  "Mass":{
+    "Teragram":9,
+    "Gigagram":6,
+    "Megagram":3,
+    "Kilogram":0,
+    "Hectogram":-1,
+    "Decagram":-2,
+    "Gram":-3
+  }
+}
