@@ -1,4 +1,3 @@
-
 function init(){
   blendColors();
 
@@ -67,7 +66,6 @@ function init(){
     color_picker_close2.style.pointerEvents ="none";
   });
 }
-
 
 function toggleSliders1(){
   let color_inputs = document.getElementsByClassName('color_input');

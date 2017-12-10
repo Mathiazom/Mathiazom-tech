@@ -1,8 +1,6 @@
 let formats = ["HEX","RGB","HSL"];
-
 let from_format;
 let to_format;
-
 
 function init(){
   let convert_from_options = document.getElementById('convert_from_dropdown').children;
@@ -24,37 +22,34 @@ function init(){
   let convert_to_input = document.getElementById('convert_to_input');
 
   convert_from_input.oninput = function(){
-    convert_to_input.value = convert();
+    convert();
   }
 
+  // RGB SPECIAL
   document.getElementById('convert_from_input_R').oninput = function(){
-    convert_to_input.value = convert();
+    convert();
   }
-
   document.getElementById('convert_from_input_G').oninput = function(){
-    convert_to_input.value = convert();
+    convert();
   }
-
   document.getElementById('convert_from_input_B').oninput = function(){
-    convert_to_input.value = convert();
+    convert();
   }
 
+  // HSL SPECIAL
   document.getElementById('convert_from_input_H').oninput = function(){
-    convert_to_input.value = convert();
+    convert();
   }
-
   document.getElementById('convert_from_input_S').oninput = function(){
-    convert_to_input.value = convert();
+    convert();
   }
-
   document.getElementById('convert_from_input_L').oninput = function(){
-    convert_to_input.value = convert();
+    convert();
   }
 
+  // DEFAULT MODES ON INIT
   changeFromFormat("HEX");
   changeToFormat("RGB");
-
-  updateDropdowns();
 }
 
 function updateDropdowns(){
@@ -89,7 +84,7 @@ function updateDropdowns(){
   })(o);
   }
 
-  convert_to_input.value = convert();
+  convert();
 }
 
 function changeFromFormat(f){
@@ -128,30 +123,108 @@ function changeToFormat(f){
 }
 
 function convert(){
-
   let convert_from_input = document.getElementById('convert_from_input');
   let convert_to_input = document.getElementById('convert_to_input');
 
+  let result;
+
+  let input = convert_from_input.value;
+  let hex_input = toHEX(input);
+
   switch (to_format) {
     case "HEX":
-      let hex = toHEX(convert_from_input.value);
-      return hex;
+      result = hex_input;
+      break;
     case "RGB":
-      return toRGB(convert_from_input.value);
+      result = toRGB(input);
+      break;
     case "CMYK":
-      return toCMYK(convert_from_input.value);
+      result = toCMYK(input);
+      break;
     case "HSL":
-      return toHSL(convert_from_input.value);
+      result = toHSL(input);
+      break;
+    default:
+      result = "";
+      break;
   }
+
+  convert_to_input.value = result;
+
+  document.body.style.background = hex_input;
+
+  document.getElementById('main_header_div').style.background = getDarkerHEX(hex_input);
+
+  if(tooBright(hex_input)){
+    document.getElementById("convert_zone").className = "darkText";
+  }else{
+    document.getElementById("convert_zone").className = "lightText";
+  }
+}
+
+function getFromHEX(col1,col2,display){
+
+  // CHECK FOR SHORT HEX VERSION (#eeeeee --> #eee)
+  if(col1.length == 4){
+    col1 = "#" + col1[1] + col1[1] + col1[2] + col1[2] + col1[3] + col1[3];
+  }
+
+  // GET RGB HEX VALUES
+  let r1_str = col1.slice(1,3);
+  let g1_str = col1.slice(3,5);
+  let b1_str = col1.slice(5,7);
+
+  // CONVERT TO DECIMAL
+  let r1 = parseInt(r1_str,16);
+  let g1 = parseInt(g1_str,16);
+  let b1 = parseInt(b1_str,16);
+
+  // CHECK FOR SHORT HEX VERSION (#eeeeee --> #eee)
+  if(col2.length == 4){
+    col2 = "#" + col2[1] + col2[1] + col2[2] + col2[2] + col2[3] + col2[3];
+  }
+
+  // CONVERT TO DECIMAL
+  let r2_str = col2.slice(1,3);
+  let g2_str = col2.slice(3,5);
+  let b2_str = col2.slice(5,7);
+
+  let r2 = parseInt(r2_str,16);
+  let g2 = parseInt(g2_str,16);
+  let b2 = parseInt(b2_str,16);
+
+  // COLOR BLENDING
+  let rx_10 = Math.round((r1+r2)/2);
+  let gx_10 = Math.round((g1+g2)/2);
+  let bx_10 = Math.round((b1+b2)/2);
+
+  if(isNaN(rx_10) || isNaN(gx_10) || isNaN(bx_10)){
+    return undefined;
+  }
+
+  // CONVERT BACK TO HEXADECIMAL
+  let rx = addZero(rx_10.toString(16));
+  rx = rx.toUpperCase();
+  let gx = addZero(gx_10.toString(16));
+  gx = gx.toUpperCase();
+  let bx = addZero(bx_10.toString(16));
+  bx = bx.toUpperCase();
+
+  // CREATE AND RETURN FINAL STRING
+  let result_string = "#" + rx + gx + bx;
+  return result_string;
+}
+
+function getDarkerHEX(col){
+  return getFromHEX(col,"#000",false);
 }
 
 function toHEX(color){
   let hex_value;
-
   // CHECK FROM FORMAT
   switch (from_format) {
     case "HEX":
-      hex_value = fromHEXtoHEX(color);
+      hex_value = formatHEX(color);
       break;
     case "RGB":
       hex_value = fromRGBtoHEX(
@@ -169,13 +242,10 @@ function toHEX(color){
         document.getElementById('convert_from_input_L').value);
       break;
   }
-
-  document.body.style.background = hex_value;
-
   return hex_value;
 }
 
-function fromHEXtoHEX(color){
+function formatHEX(color){
   // FORMAT CHECK
   return color[0] == "#" ? (color.length == 4  ? color + color.slice(1,4) : (color.length == 7 ? color : "")) : "";
 }
@@ -193,7 +263,11 @@ function fromRGBtoHEX(r,g,b){
   }
 
   // RETURN IF NO EXCEPTIONS
-  return "#" + parseInt(r).toString(16) + parseInt(g).toString(16) + parseInt(b).toString(16);
+  return "#" + addZero(parseInt(r).toString(16)) + addZero(parseInt(g).toString(16)) + addZero(parseInt(b).toString(16));
+}
+
+function addZero(s){
+  return s.length < 2 ? "0" + s : s;
 }
 
 function fromCMYKtoHEX(color){
@@ -281,6 +355,7 @@ function toRGB(color){
   if(!isNaN(r) && !isNaN(g) && !isNaN(b)){
     return "rgb(" + r + "," + g + "," + b + ")";
   }
+
   return "";
 }
 
@@ -345,6 +420,17 @@ function toHSL(color){
 
   return "hsl(" + H + "," + S + "%," + L + "%)";
 
+}
+
+function tooBright(color){
+  let red = parseInt(color.slice(1,3),16);
+  let green = parseInt(color.slice(3,5),16);
+  let blue = parseInt(color.slice(5,7),16);
+
+  if((red*0.299 + green*0.587 + blue*0.114) > 186){
+    return true;
+  }
+  return false;
 }
 
 window.onload = function(){
