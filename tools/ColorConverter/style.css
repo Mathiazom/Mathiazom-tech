@@ -1,0 +1,152 @@
+body{
+  background:#012C4E;
+}
+
+#main_header_div{
+  background: #01579b;
+}
+
+#convert_zone{
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto;
+  grid-template-areas:
+  "convert_from convert_to";
+  padding: 50px 0;
+  grid-gap: 0 50px;
+}
+
+#convert_from{
+  grid-area: convert_from;
+}
+
+#convert_to{
+  grid-area: convert_to;
+}
+
+@media screen and (max-width:800px){
+  #convert_zone{
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+    "convert_from"
+    "convert_to";
+    padding: 20px 0;
+    grid-gap: 0 50px;
+  }
+}
+
+.dropdown_title{
+  color: #eee;
+  font-weight: 200;
+  margin-bottom: 0;
+  border-left: 7px solid rgba(255,255,255,0.7);
+  padding-left: 10px;
+  font-size: 30px;
+}
+
+.dropdown:hover .dropdown_content{
+  transform: scaleY(1) !important;
+  transform-origin: top;
+}
+
+.dropdown:hover #base_unit{
+  border-left: 7px solid #eee;
+}
+
+.dropdown{
+  font-weight: 300;
+  font-size: 1.7em;
+  margin-top: 50px !important;
+  position: relative;
+  color: #eee;
+  max-width: 100%;
+}
+
+.dropdown_content{
+  position: absolute;
+  z-index: 1;
+  background: #eee;
+  font-size: 20px;
+  color: #212121;
+  transform :scaleY(0);
+  transform-origin: top;
+  transition: transform 0.2s;
+  max-height: 300px;
+  width: 100%;
+  min-width: 200px;
+  overflow: scroll;
+}
+
+.dropdown_content p{
+  padding: 17px 20px;
+  margin: 0;
+}
+
+.dropdown_content p:hover{
+  background: #212121;
+  color: #eee;
+  cursor: pointer;
+}
+
+.dropdown_content h1{
+  padding: 5px 10px;
+  margin: 0;
+  font-size: 15px;
+  background: #bc5100;
+  color: #eee;
+  font-weight: 200;
+}
+
+.convert_input{
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  color: #eee;
+  font-size: 1.7em;
+  margin: 20px auto;
+  width: 100%;
+}
+
+.convert_input::placeholder{
+  color: rgba(255,255,255,0.5);
+}
+
+.convert_input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: rgba(255,255,255,0.5);
+}
+.convert_input::-moz-placeholder { /* Firefox 19+ */
+  color: rgba(255,255,255,0.5);
+}
+.convert_input:-ms-input-placeholder { /* IE 10+ */
+  color: rgba(255,255,255,0.5);
+}
+.convert_input:-moz-placeholder { /* Firefox 18- */
+  color: rgba(255,255,255,0.5);
+}
+
+.convert_input:focus{
+  outline: none;
+  border-bottom: 1px solid #eee;
+}
+
+.custom_convert_from_inputs{
+  display: none;
+}
+
+.custom_convert_from_inputs *{
+  font-size: 1.7em;
+}
+
+.custom_convert_from_inputs input{
+  display: inline-block;
+  width: auto;
+  text-align: center;
+}
+
+.custom_convert_from_inputs p{
+  display: inline-block;
+  color: rgba(255,255,255,0.5);
+}

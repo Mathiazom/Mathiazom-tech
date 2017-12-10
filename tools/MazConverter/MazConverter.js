@@ -141,20 +141,6 @@ function getConvertedValue(){
     };
   })();
 
-  Math.a = function () {
-    var f = _cf.apply(null, arguments); if(f === undefined) return undefined;
-    function cb(x, y, i, o) { return x + f * y; }
-    return Array.prototype.reduce.call(arguments, cb, 0) / f;
-  };
-
-  Math.s = function (l,r) { var f = _cf(l,r); return (l * f - r * f) / f; };
-
-  Math.m = function () {
-    var f = _cf.apply(null, arguments);
-    function cb(x, y, i, o) { return (x*f) * (y*f) / (f * f); }
-    return Array.prototype.reduce.call(arguments, cb, 1);
-  };
-
   Math.d = function (l,r) { var f = _cf(l,r); return (l * f) / (r * f); };
 
   return Math.d(convertFromFactor,convertToFactor);

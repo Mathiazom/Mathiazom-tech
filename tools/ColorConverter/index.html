@@ -1,0 +1,68 @@
+<html>
+<head>
+  <script src=../../uniscript.js></script>
+  <script src=colorConverter.js></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Color Blender - Mathiazom</title>
+  <link rel="stylesheet" type="text/css" href="../../unistyle.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+  <link rel="shortcut icon" type="image/png" href="../../img/favicon.png"/>
+</head>
+
+<body>
+  <header>
+    <a href="/">
+      <div id=main_title_div style="box-shadow:none">
+        <img id=main_title_logo src=../../img/logo.png>
+        <button id=back_button><i class="material-icons">navigate_before</i></button>
+      </div>
+    </a>
+  </header>
+
+  <div id=main_header_div>
+    <h1 id=mainheader>Color Converter</h1>
+  </div>
+
+  <div id=convert_zone>
+    <div id=convert_from>
+      <div class=dropdown>
+        <h1 id=convert_from_title class=dropdown_title></h1>
+        <div id=convert_from_dropdown class=dropdown_content>
+        </div>
+      </div>
+
+      <input id=convert_from_input class=convert_input></input>
+
+      <!-- RGB SPECIAL INPUTS -->
+      <div id=convert_from_input_RGB class=custom_convert_from_inputs>
+        <p>rgb(</p><input placeholder="R" type="number" min="0" max="255" id=convert_from_input_R class=convert_input></input>
+        <p>,</p><input placeholder="G" type="number" min="0" max="255" id=convert_from_input_G class=convert_input></input>
+        <p>,</p><input placeholder="B" type="number" min="0" max="255" id=convert_from_input_B class=convert_input></input>
+        <p>)</p>
+      </div>
+
+      <!-- HSL SPECIAL INPUTS -->
+      <div id=convert_from_input_HSL class=custom_convert_from_inputs>
+        <p>hsl(</p><input placeholder="H" type="number" min="0" max="360" id=convert_from_input_H class=convert_input></input>
+        <p>,</p><input placeholder="S" type="number" min="0" max="100" id=convert_from_input_S class=convert_input></input>
+        <p>%,</p><input placeholder="L" type="number" min="0" max="100" id=convert_from_input_L class=convert_input></input>
+        <p>%)</p>
+      </div>
+
+    </div>
+    <div id=convert_to>
+      <div class=dropdown>
+        <h1 id=convert_to_title class=dropdown_title>RGB</h1>
+        <div id=convert_to_dropdown class=dropdown_content>
+        </div>
+      </div>
+
+      <input id=convert_to_input class=convert_input disabled></input>
+    </div>
+  </div>
+</body>
+
+</html>
